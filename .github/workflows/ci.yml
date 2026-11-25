@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: suertazo
+          POSTGRES_PASSWORD: suertazo
+          POSTGRES_DB: suertazo
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U suertazo"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://suertazo:suertazo@localhost:5432/suertazo
+      ADMIN_EMAIL: admin@suertazo.test
+      ADMIN_PASSWORD: clave-de-prueba-ci
+      APP_URL: http://localhost:4817
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run db:setup
+      - run: npm run build
