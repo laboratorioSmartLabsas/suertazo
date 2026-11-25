@@ -63,7 +63,7 @@ const AJUSTES_POR_DEFECTO: Omit<Ajustes, "actualizadoEn"> = {
   nombrePasarela: "Wompi",
   instruccionesPago: null,
   comisionPorcentaje: 20,
-  nivelesComision: [50, 10, 10, 10, 10],
+  nivelesComision: [50, 10, 10, 10, 20],
   horasReserva: 48,
   retiroMinimo: 50000,
 };

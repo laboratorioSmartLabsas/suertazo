@@ -284,7 +284,7 @@ export async function guardarAjustes(_previo: EstadoAccion, formData: FormData):
     .map((v) => Number(v.trim()))
     .filter((v) => Number.isFinite(v));
   if (!niveles.length || niveles.length > 10 || niveles.some((v) => v < 0 || v > 100)) {
-    return { error: "Escribe los porcentajes por línea separados por comas, por ejemplo 50, 10, 10, 10, 10." };
+    return { error: "Escribe los porcentajes por línea separados por comas, por ejemplo 50, 10, 10, 10, 20." };
   }
   if (niveles.reduce((a, b) => a + b, 0) > 100) return { error: "La suma de las líneas no puede superar el 100% de la bolsa." };
   const valores = {

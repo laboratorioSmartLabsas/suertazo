@@ -28,7 +28,7 @@ Los números se reservan durante las horas que se configuren (48 por defecto). S
 
 **Referidos y billetera**
 - Cada usuario tiene un link `/r/CODIGO` que lleva al inicio y deja el rastro de quien lo invitó.
-- La bolsa de comisión es el 20% de cada pago aprobado. Se reparte en líneas: 50% para la primera y 10% para cada una de las cuatro siguientes. Los porcentajes se configuran en *Panel → Ajustes*.
+- La bolsa de comisión es el 20% de cada pago aprobado. Se reparte en líneas: 50% para la primera línea, 10% para cada una de las líneas 2, 3 y 4, y 20% para la quinta, que suman el 100% de la bolsa. Los porcentajes se configuran en *Panel → Ajustes*.
 - La billetera muestra lo ganado por línea, los retiros y el saldo disponible. El máster paga los retiros en *Panel → Comisiones*.
 
 ## Correr en local

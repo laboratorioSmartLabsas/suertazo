@@ -69,7 +69,7 @@ export const ajustes = pgTable("ajustes", {
   nombrePasarela: text("nombre_pasarela").notNull().default("Wompi"),
   instruccionesPago: text("instrucciones_pago"),
   comisionPorcentaje: integer("comision_porcentaje").notNull().default(20),
-  nivelesComision: jsonb("niveles_comision").$type<number[]>().notNull().default([50, 10, 10, 10, 10]),
+  nivelesComision: jsonb("niveles_comision").$type<number[]>().notNull().default([50, 10, 10, 10, 20]),
   horasReserva: integer("horas_reserva").notNull().default(48),
   retiroMinimo: integer("retiro_minimo").notNull().default(50000),
   actualizadoEn: timestamp("actualizado_en", { withTimezone: true }).notNull().defaultNow(),
