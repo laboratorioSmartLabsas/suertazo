@@ -135,7 +135,7 @@ export async function eliminarPremio(premioId: number, _previo: EstadoAccion): P
 
 export async function iniciarCuentaRegresivaAccion(rifaId: number, _previo: EstadoAccion): Promise<EstadoAccion> {
   await requerirAdmin();
-  const avisos = await db.transaction((tx) => activarCuentaRegresiva(tx, rifaId));
+  const avisos = await db.transaction((tx) => activarCuentaRegresiva(tx, rifaId, false));
   if (!avisos.length) return { error: "La rifa ya tiene fecha de inicio de sorteos." };
   await enviarPush(avisos);
   revalidatePath("/", "layout");

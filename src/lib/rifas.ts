@@ -167,7 +167,7 @@ export async function generarSorteos(tx: Tx, rifa: Rifa, inicio: string) {
 }
 
 /** Fija la fecha de inicio de los sorteos (hoy + meses de espera) y genera el calendario. */
-export async function activarCuentaRegresiva(tx: Tx, rifaId: number): Promise<NuevaNotificacion[]> {
+export async function activarCuentaRegresiva(tx: Tx, rifaId: number, porMeta = true): Promise<NuevaNotificacion[]> {
   const [rifa] = await tx.select().from(rifas).where(eq(rifas.id, rifaId)).for("update");
   if (!rifa || rifa.fechaInicioSorteos) return [];
   const inicio = sumarMeses(hoyColombia(), rifa.mesesEspera);
@@ -177,7 +177,9 @@ export async function activarCuentaRegresiva(tx: Tx, rifaId: number): Promise<Nu
     usuarioId: null,
     tipo: "sistema",
     titulo: `¡${rifa.nombre} ya tiene fecha!`,
-    mensaje: `Se alcanzó el ${rifa.porcentajePreventa}% de la boletería. Los sorteos inician el ${formatoFecha(inicio)}.`,
+    mensaje: porMeta
+      ? `Se alcanzó el ${rifa.porcentajePreventa}% de la boletería. Los sorteos inician el ${formatoFecha(inicio)}.`
+      : `Los sorteos diarios inician el ${formatoFecha(inicio)}. ¡Asegura tus números antes de esa fecha!`,
     enlace: `/rifas/${rifa.slug}`,
   };
   await crearNotificaciones(tx, [aviso]);
