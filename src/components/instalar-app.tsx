@@ -40,7 +40,7 @@ export function InstalarApp() {
   return (
     <Button variant="outline" size="sm" onClick={instalar}>
       <Download data-icon="inline-start" />
-      Instalar Suertudo
+      Instalar app
     </Button>
   );
 }
