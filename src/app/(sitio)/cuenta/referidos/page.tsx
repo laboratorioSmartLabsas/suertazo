@@ -11,13 +11,14 @@ import { requerirUsuario } from "@/lib/auth";
 import { formatoFechaCorta } from "@/lib/fechas";
 import { nombrePublico } from "@/lib/formato";
 import { obtenerAjustes } from "@/lib/rifas";
+import { urlPublica } from "@/lib/url";
 
 export const metadata: Metadata = { title: "Referidos" };
 
 export default async function Referidos() {
   const usuario = await requerirUsuario("/cuenta/referidos");
   const config = await obtenerAjustes();
-  const base = (process.env.APP_URL ?? "http://localhost:4817").replace(/\/$/, "");
+  const base = await urlPublica();
   const link = `${base}/r/${usuario.codigoReferido}`;
   const mensaje = encodeURIComponent(`¡Juega conmigo en Suertazo! $1.000.000 diarios, un lote en Guatapé y una NMAX. Compra tu boleta aquí: ${link}`);
 

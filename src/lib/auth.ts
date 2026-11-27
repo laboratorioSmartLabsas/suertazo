@@ -14,6 +14,7 @@ export const COOKIE_VISTAS = "suertazo_vistas";
 const DURACION_SESION_DIAS = 30;
 
 export function cookieSegura(): boolean {
+  if (process.env.RAILWAY_ENVIRONMENT_NAME || process.env.RAILWAY_PUBLIC_DOMAIN) return true;
   if (process.env.APP_URL?.startsWith("http://")) return false;
   return process.env.NODE_ENV === "production";
 }
