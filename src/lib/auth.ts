@@ -6,6 +6,7 @@ import { and, eq, gt, inArray, isNull, lt, or } from "drizzle-orm";
 import { db } from "@/db";
 import { boletas, ordenes, sesiones, usuarios, type Usuario } from "@/db/schema";
 import { hashToken, tokenSeguro } from "@/lib/codigos";
+import { vincularPadrino } from "@/lib/referidos";
 
 export const COOKIE_SESION = "suertazo_sesion";
 export const COOKIE_COMPRAS = "suertazo_compras";
@@ -110,8 +111,10 @@ export async function asentarComprasInvitado(usuario: { id: number; email: strin
     .update(ordenes)
     .set({ usuarioId: usuario.id })
     .where(and(isNull(ordenes.usuarioId), or(...condiciones)))
-    .returning({ id: ordenes.id });
+    .returning({ id: ordenes.id, referidorId: ordenes.referidorId });
   if (asentadas.length) {
+    const padrino = asentadas.find((o) => o.referidorId)?.referidorId ?? null;
+    await vincularPadrino(db, usuario.id, padrino);
     await db
       .update(boletas)
       .set({ usuarioId: usuario.id })

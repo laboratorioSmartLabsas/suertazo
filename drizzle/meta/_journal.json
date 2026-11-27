@@ -36,6 +36,13 @@
       "when": 1795758296552,
       "tag": "0004_link_wompi_cuotas",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1795761127882,
+      "tag": "0005_vincular_referidos_existentes",
+      "breakpoints": true
     }
   ]
 }

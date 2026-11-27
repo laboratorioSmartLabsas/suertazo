@@ -20,6 +20,7 @@ import { habilitadaParaSorteo, periodoDe, totalPeriodos } from "@/lib/cuotas";
 import { formatoFecha, hoyColombia, sumarDias, sumarMeses } from "@/lib/fechas";
 import { formatoBoleta, formatoPesos, nombrePublico } from "@/lib/formato";
 import { crearNotificaciones, enviarPush, type NuevaNotificacion } from "@/lib/notificaciones";
+import { vincularPadrino } from "@/lib/referidos";
 
 export const MAX_BOLETAS_POR_ORDEN = 50;
 
@@ -273,6 +274,7 @@ export async function aprobarOrden(ordenId: number, adminId: number): Promise<Re
       const config = await obtenerAjustes(tx);
       let inicioCadena = orden.referidorId;
       if (orden.usuarioId) {
+        await vincularPadrino(tx, orden.usuarioId, orden.referidorId);
         const [comprador] = await tx
           .select({ referidoPorId: usuarios.referidoPorId })
           .from(usuarios)
