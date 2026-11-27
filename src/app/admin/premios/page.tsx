@@ -15,7 +15,7 @@ export const metadata: Metadata = { title: "Premiaciones" };
 
 export default async function PremiosAdmin() {
   const lista = await db
-    .select({ sorteo: sorteos, rifa: rifas.nombre, cifras: rifas.cifras, loteria: loterias.nombre, telefono: usuarios.telefono, documento: usuarios.documento })
+    .select({ sorteo: sorteos, rifa: rifas.nombre, cifras: rifas.cifras, loteria: loterias.nombre, telefono: usuarios.telefono })
     .from(sorteos)
     .innerJoin(rifas, eq(rifas.id, sorteos.rifaId))
     .leftJoin(loterias, eq(loterias.id, sorteos.loteriaId))
@@ -49,7 +49,7 @@ export default async function PremiosAdmin() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {lista.map(({ sorteo, rifa, cifras, loteria, telefono, documento }) => (
+                {lista.map(({ sorteo, rifa, cifras, loteria, telefono }) => (
                   <TableRow key={sorteo.id}>
                     <TableCell>
                       <p className="font-medium">{sorteo.titulo}</p>
@@ -60,10 +60,7 @@ export default async function PremiosAdmin() {
                     <TableCell className="font-heading font-bold tracking-widest">{formatoBoleta(sorteo.numeroGanador ?? 0, cifras)}</TableCell>
                     <TableCell>
                       <p>{sorteo.ganadorNombre}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {telefono ?? "Sin cuenta"}
-                        {documento ? ` · CC ${documento}` : ""}
-                      </p>
+                      <p className="text-xs text-muted-foreground">{telefono ?? "Sin cuenta"}</p>
                     </TableCell>
                     <TableCell className="text-right">{sorteo.valorPremio ? formatoPesos(sorteo.valorPremio) : "En especie"}</TableCell>
                     <TableCell className="text-right">

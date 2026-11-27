@@ -28,7 +28,6 @@ export default async function UsuariosAdmin({ searchParams }: { searchParams: Pr
         nombre: usuarios.nombre,
         email: usuarios.email,
         telefono: usuarios.telefono,
-        documento: usuarios.documento,
         rol: usuarios.rol,
         codigoReferido: usuarios.codigoReferido,
         creadoEn: usuarios.creadoEn,
@@ -45,7 +44,6 @@ export default async function UsuariosAdmin({ searchParams }: { searchParams: Pr
             ilike(usuarios.nombre, `%${texto}%`),
             ilike(usuarios.email, `%${texto}%`),
             ilike(usuarios.telefono, `%${texto}%`),
-            ilike(usuarios.documento, `%${texto}%`),
           )
         : undefined,
     )
@@ -56,7 +54,7 @@ export default async function UsuariosAdmin({ searchParams }: { searchParams: Pr
     <>
       <TituloAdmin titulo="Usuarios" descripcion="Personas registradas, su red y sus boletas." />
       <form className="flex gap-2" action="/admin/usuarios">
-        <Input name="q" defaultValue={texto} placeholder="Nombre, correo, celular o cédula" className="max-w-sm" />
+        <Input name="q" defaultValue={texto} placeholder="Nombre, correo o celular" className="max-w-sm" />
         <Button type="submit" variant="outline">Buscar</Button>
       </form>
       <Card>
@@ -86,10 +84,7 @@ export default async function UsuariosAdmin({ searchParams }: { searchParams: Pr
                     </TableCell>
                     <TableCell>
                       <p>{usuario.email}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {usuario.telefono}
-                        {usuario.documento ? ` · CC ${usuario.documento}` : ""}
-                      </p>
+                      <p className="text-xs text-muted-foreground">{usuario.telefono}</p>
                     </TableCell>
                     <TableCell>{nombrePadrino ?? "—"}</TableCell>
                     <TableCell className="text-right">{boletas}</TableCell>

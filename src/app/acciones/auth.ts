@@ -32,7 +32,6 @@ const esquemaRegistro = z
       .string()
       .trim()
       .regex(/^[0-9+\s-]{7,20}$/, "Escribe un celular válido."),
-    documento: z.string().trim().max(20).optional(),
     clave: z.string().min(8, "La contraseña debe tener al menos 8 caracteres.").max(72),
     confirmacion: z.string(),
     terminos: z.literal("on", { message: "Debes aceptar los términos y condiciones." }),
@@ -51,7 +50,7 @@ async function generarCodigoUnico(): Promise<string> {
 export async function registrarse(_previo: EstadoAccion, formData: FormData): Promise<EstadoAccion> {
   const datos = esquemaRegistro.safeParse(Object.fromEntries(formData));
   if (!datos.success) return { error: datos.error.issues[0]?.message ?? "Revisa los datos." };
-  const { nombre, email, telefono, documento, clave } = datos.data;
+  const { nombre, email, telefono, clave } = datos.data;
 
   const [existe] = await db.select({ id: usuarios.id }).from(usuarios).where(eq(usuarios.email, email)).limit(1);
   if (existe) return { error: "Ya existe una cuenta con ese correo. Inicia sesión." };
@@ -81,7 +80,6 @@ export async function registrarse(_previo: EstadoAccion, formData: FormData): Pr
       nombre,
       email,
       telefono,
-      documento: documento || null,
       passwordHash: await hashClave(clave),
       codigoReferido: await generarCodigoUnico(),
       referidoPorId,

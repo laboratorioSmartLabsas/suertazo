@@ -55,8 +55,8 @@ async function main() {
         slug: "gran-rifa-suertazo",
         nombre: "Gran Rifa Suertazo",
         descripcion:
-          "La rifa que paga todos los días: $1.000.000 diario durante 365 días, más un lote en Guatapé y una Yamaha NMAX de concesionario. Tu boleta de 4 cifras juega con el resultado de la lotería del día. Págala de contado ($150.000) o con cuotas mensuales de $15.000: la cuota de cada mes habilita tu boleta para los sorteos de ese mes, y al completar el valor de la boleta queda paga para todo el año.",
-        precioBoleta: 150000,
+          "La rifa que paga todos los días: $1.000.000 diario durante 365 días, más un lote en Guatapé y una Yamaha NMAX de concesionario. Tu boleta de 4 cifras juega con el resultado de la lotería del día. Págala de contado ($180.000) o con cuotas mensuales de $15.000: la cuota de cada mes habilita tu boleta para los sorteos de ese mes, y al completar el valor de la boleta queda paga para todo el año.",
+        precioBoleta: 180000,
         valorCuota: 15000,
         cifras: 4,
         porcentajePreventa: 30,

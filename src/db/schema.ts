@@ -32,7 +32,6 @@ export const usuarios = pgTable(
     nombre: text("nombre").notNull(),
     email: text("email").notNull(),
     telefono: text("telefono").notNull(),
-    documento: text("documento"),
     passwordHash: text("password_hash").notNull(),
     rol: rolEnum("rol").notNull().default("usuario"),
     codigoReferido: text("codigo_referido").notNull(),

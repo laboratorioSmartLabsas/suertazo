@@ -16,9 +16,9 @@ Suertazo es una plataforma de rifas instalable como app (PWA). Las personas comp
 Los números se reservan durante las horas que se configuren (48 por defecto). Si una reserva vence, el máster todavía puede aprobarla siempre que los números sigan libres.
 
 **Plan de cuotas**
-- Precio de la boleta: $150.000, de contado o en 10 cuotas mensuales de $15.000.
+- Precio de la boleta: $180.000, de contado o en 12 cuotas mensuales de $15.000.
 - Cada cuota habilita la boleta para los sorteos de ese mes. Un mes sin cuota no juega.
-- Al completar los $150.000, la boleta juega todos los meses que falten.
+- Al completar los $180.000, la boleta juega todos los meses que falten.
 - Solo cuentan los pagos solicitados antes o el mismo día del sorteo. Si un número ganador tiene la cuota de ese mes en revisión, el sistema no deja publicar el resultado hasta que el máster apruebe o rechace ese pago.
 
 **Fases de la rifa**
@@ -63,12 +63,12 @@ Ingresa con `ADMIN_EMAIL` / `ADMIN_PASSWORD` para abrir el panel en `/admin`.
 | --- | --- |
 | `DATABASE_URL` | `${{Postgres.DATABASE_URL}}` (referencia a la base de datos) |
 | `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NOMBRE`, `ADMIN_TELEFONO` | Datos del máster que se crea en el primer arranque |
-| `APP_URL` | Dominio público, por ejemplo `https://suertazo.up.railway.app` |
+| `APP_URL` | Opcional. Dominio público, por ejemplo `https://suertazo.up.railway.app`. Si no existe se usa el dominio que Railway inyecta; los valores con `localhost` se ignoran |
 | `WOMPI_LINK_PAGO` | Link de pago de Wompi de la primera rifa (también se edita desde el panel) |
 | `CRON_SECRET` | Clave larga aleatoria |
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Opcional, para notificaciones push. Se generan con `npx web-push generate-vapid-keys` |
 
-5. En **Settings → Networking**, genera un dominio y ponlo en `APP_URL`.
+5. En **Settings → Networking**, genera un dominio. Los links de referido usarán ese dominio automáticamente (puedes fijarlo con `APP_URL`).
 6. `railway.json` ya define la compilación y el arranque. En cada despliegue, `npm run start:railway` aplica las migraciones y el seed antes de iniciar el servidor.
 7. Opcional: crea un servicio *Cron* en Railway que corra cada hora y ejecute:
 

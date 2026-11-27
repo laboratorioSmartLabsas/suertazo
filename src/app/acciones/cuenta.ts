@@ -19,7 +19,6 @@ const esquemaPerfil = z.object({
     .string()
     .trim()
     .regex(/^[0-9+\s-]{7,20}$/, "Escribe un celular válido."),
-  documento: z.string().trim().max(20).optional(),
 });
 
 export async function actualizarPerfil(_previo: EstadoAccion, formData: FormData): Promise<EstadoAccion> {
@@ -28,7 +27,7 @@ export async function actualizarPerfil(_previo: EstadoAccion, formData: FormData
   if (!datos.success) return { error: datos.error.issues[0]?.message ?? "Revisa los datos." };
   await db
     .update(usuarios)
-    .set({ nombre: datos.data.nombre, telefono: datos.data.telefono, documento: datos.data.documento || null })
+    .set({ nombre: datos.data.nombre, telefono: datos.data.telefono })
     .where(eq(usuarios.id, usuario.id));
   revalidatePath("/cuenta", "layout");
   return { ok: true, mensaje: "Perfil actualizado." };

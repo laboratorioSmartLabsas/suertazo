@@ -55,7 +55,6 @@ export function FormularioRegistro({
       <Campo id="email" etiqueta="Correo" type="email" autoComplete="email" defaultValue={inicial.email} required />
       <Campo id="telefono" etiqueta="Celular (WhatsApp)" type="tel" autoComplete="tel" defaultValue={inicial.telefono} required />
       <div className="sm:col-span-2">
-        <Campo id="documento" etiqueta="Cédula (para entregar premios)" inputMode="numeric" />
       </div>
       <Campo id="clave" etiqueta="Contraseña" type="password" autoComplete="new-password" minLength={8} required />
       <Campo id="confirmacion" etiqueta="Confirma la contraseña" type="password" autoComplete="new-password" minLength={8} required />

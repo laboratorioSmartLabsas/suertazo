@@ -31,10 +31,6 @@ export default async function Perfil() {
               <Label htmlFor="telefono">Celular (WhatsApp)</Label>
               <Input id="telefono" name="telefono" type="tel" defaultValue={usuario.telefono} required />
             </div>
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor="documento">Cédula</Label>
-              <Input id="documento" name="documento" defaultValue={usuario.documento ?? ""} inputMode="numeric" />
-            </div>
             <BotonEnviar className="fondo-oro w-fit">Guardar cambios</BotonEnviar>
           </FormAccion>
         </CardContent>

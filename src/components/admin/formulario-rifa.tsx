@@ -31,7 +31,7 @@ export function FormularioRifa({ rifa }: { rifa?: Rifa }) {
         <Label htmlFor="descripcion">Descripción</Label>
         <Textarea id="descripcion" name="descripcion" defaultValue={rifa?.descripcion} rows={4} required />
       </div>
-      <Campo id="precioBoleta" etiqueta="Precio de contado (COP)" type="number" min={1000} step={1000} defaultValue={rifa?.precioBoleta ?? 150000} required />
+      <Campo id="precioBoleta" etiqueta="Precio de contado (COP)" type="number" min={1000} step={1000} defaultValue={rifa?.precioBoleta ?? 180000} required />
       <Campo
         id="valorCuota"
         etiqueta="Valor de la cuota mensual (COP)"
