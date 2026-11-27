@@ -64,8 +64,8 @@ Ingresa con `ADMIN_EMAIL` / `ADMIN_PASSWORD` para abrir el panel en `/admin`.
 | `DATABASE_URL` | `${{Postgres.DATABASE_URL}}` (referencia a la base de datos) |
 | `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NOMBRE`, `ADMIN_TELEFONO` | Datos del máster que se crea en el primer arranque |
 | `APP_URL` | Opcional. Dominio público, por ejemplo `https://suertazo.up.railway.app`. Si no existe se usa el dominio que Railway inyecta; los valores con `localhost` se ignoran |
-| `WOMPI_LINK_PAGO` | Opcional. Link de Wompi de contado ($180.000) de la primera rifa (por defecto el de Nequi/Wompi ya configurado; se edita desde el panel) |
-| `WOMPI_LINK_CUOTAS` | Opcional. Link de Wompi de cuota ($15.000) de la primera rifa |
+| `WOMPI_LINK_PAGO` | Opcional. Link de Wompi de monto libre de la primera rifa (contado y varias cuotas) (por defecto el de Nequi/Wompi ya configurado; se edita desde el panel) |
+| `WOMPI_LINK_CUOTAS` | Opcional. Link de Wompi de una sola cuota ($15.000) de la primera rifa |
 | `CRON_SECRET` | Clave larga aleatoria |
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Opcional, para notificaciones push. Se generan con `npx web-push generate-vapid-keys` |
 

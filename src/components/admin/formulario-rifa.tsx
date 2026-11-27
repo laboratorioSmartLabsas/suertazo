@@ -63,21 +63,21 @@ export function FormularioRifa({ rifa }: { rifa?: Rifa }) {
       </div>
       <Campo
         id="linkPago"
-        etiqueta="Link de pago de contado (Wompi)"
+        etiqueta="Link de pago con monto libre (Wompi)"
         type="url"
         className="sm:col-span-2"
         defaultValue={rifa?.linkPago ?? ""}
         placeholder="https://checkout.nequi.wompi.co/l/..."
-        ayuda="Se muestra cuando la persona compra la boleta de contado."
+        ayuda="La persona escribe el monto. Se usa para compras de contado y cuando paga varias cuotas a la vez."
       />
       <Campo
         id="linkPagoCuotas"
-        etiqueta="Link de pago de cuotas (Wompi)"
+        etiqueta="Link de una sola cuota (Wompi)"
         type="url"
         className="sm:col-span-2"
         defaultValue={rifa?.linkPagoCuotas ?? ""}
         placeholder="https://checkout.nequi.wompi.co/l/..."
-        ayuda="Se muestra cuando la persona paga una cuota mensual (compra en cuotas o pago de cuotas)."
+        ayuda="Monto fijo de una cuota. Se usa cuando la persona paga exactamente una cuota."
       />
       <Campo id="imagenUrl" etiqueta="Imagen (opcional)" type="url" className="sm:col-span-2" defaultValue={rifa?.imagenUrl ?? ""} />
       <div className="sm:col-span-2">

@@ -45,10 +45,10 @@ export default async function PaginaCompra({ params }: Props) {
 
   const estado = ESTADOS[orden.estado];
   const esCuota = orden.tipo === "cuota";
-  const pagaCuotas = esCuota || orden.plan === "cuotas";
-  const linkPago = pagaCuotas ? rifa.linkPagoCuotas : rifa.linkPago;
   const unidades = esCuota ? (orden.detalle ?? []).length : orden.numeros.length;
-  const valorUnidad = pagaCuotas ? rifa.valorCuota : rifa.precioBoleta;
+  const esUnaCuota = (esCuota || orden.plan === "cuotas") && unidades === 1 && orden.total === rifa.valorCuota;
+  const linkPago = esUnaCuota && rifa.linkPagoCuotas ? rifa.linkPagoCuotas : rifa.linkPago;
+  const montoLibre = linkPago !== null && linkPago === rifa.linkPago && linkPago !== rifa.linkPagoCuotas;
   const parametrosRegistro = new URLSearchParams({
     email: orden.emailContacto,
     nombre: orden.nombreContacto,
@@ -107,7 +107,7 @@ export default async function PaginaCompra({ params }: Props) {
                   rel="noopener noreferrer"
                   className={cn(buttonVariants({ size: "lg" }), "fondo-oro h-12 text-base")}
                 >
-                  Pagar {formatoPesos(valorUnidad)} en {config.nombrePasarela}
+                  Pagar {formatoPesos(orden.total)} en {config.nombrePasarela}
                   <ExternalLink data-icon="inline-end" />
                 </a>
               ) : (
@@ -118,21 +118,22 @@ export default async function PaginaCompra({ params }: Props) {
                   </AlertDescription>
                 </Alert>
               )}
-              {linkPago && unidades > 1 && (
+              {linkPago && montoLibre && (
                 <Alert>
-                  <AlertTitle>
-                    Tu solicitud es de {unidades} × {formatoPesos(valorUnidad)}
-                  </AlertTitle>
-                  <AlertDescription>
-                    Cada link de pago es de {formatoPesos(valorUnidad)}. Realiza {unidades} pagos (uno por cada {pagaCuotas ? "cuota" : "boleta"}) usando la misma referencia{" "}
-                    {orden.referencia}.
-                  </AlertDescription>
+                  <AlertTitle>Escribe el monto exacto: {formatoPesos(orden.total)}</AlertTitle>
+                  <AlertDescription>En este link tú ingresas el valor. Digita {formatoPesos(orden.total)} para que podamos aprobar tu solicitud.</AlertDescription>
                 </Alert>
               )}
               <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
-                <li>1. Paga exactamente {formatoPesos(orden.total)} y escribe la referencia {orden.referencia} en la descripción. Si el pago no te deja escribirla, envíanos el comprobante con la referencia.</li>
-                <li>2. El máster verifica el pago en el banco y aprueba tu solicitud.</li>
-                <li>3. Te llega una notificación y tus boletas quedan en tu perfil.</li>
+                <li>
+                  1. Paga {formatoPesos(orden.total)} en el link de {config.nombrePasarela}. Si te pide un concepto o descripción, escribe la referencia{" "}
+                  {orden.referencia}.
+                </li>
+                <li>2. No tienes que enviar nada más: el máster recibe tu solicitud, verifica el pago y la aprueba.</li>
+                <li>
+                  3. Mientras tanto verás esta solicitud en tu perfil como pendiente de aprobación. Cuando el máster la habilite, te llega una notificación y tus boletas
+                  quedan activas.
+                </li>
               </ul>
               {config.instruccionesPago && <p className="text-sm text-muted-foreground">{config.instruccionesPago}</p>}
               <p className="flex items-center gap-2 text-xs text-muted-foreground">

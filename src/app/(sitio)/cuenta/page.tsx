@@ -79,7 +79,7 @@ export default async function InicioCuenta() {
       {pendientes.length > 0 && (
         <section className="flex flex-col gap-3">
           <h2 className="flex items-center gap-2 text-lg font-semibold">
-            <Clock className="size-5 text-primary" /> Pagos en revisión
+            <Clock className="size-5 text-primary" /> Pendientes de aprobación
           </h2>
           <ul className="flex flex-col gap-2">
             {pendientes.map(({ orden, rifaNombre, cifras }) => (
@@ -97,7 +97,10 @@ export default async function InicioCuenta() {
                       {formatoFechaHora(orden.venceEn)}
                     </p>
                   </div>
-                  <span className="font-bold text-primary">{formatoPesos(orden.total)}</span>
+                  <span className="text-right">
+                    <span className="block font-bold text-primary">{formatoPesos(orden.total)}</span>
+                    <span className="block text-xs text-muted-foreground">Pendiente de aprobación del máster</span>
+                  </span>
                 </Link>
               </li>
             ))}
