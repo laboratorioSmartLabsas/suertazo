@@ -29,6 +29,13 @@
       "when": 1795757777016,
       "tag": "0003_precio_180mil_sin_cedula",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1795758296552,
+      "tag": "0004_link_wompi_cuotas",
+      "breakpoints": true
     }
   ]
 }

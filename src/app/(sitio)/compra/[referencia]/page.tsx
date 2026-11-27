@@ -45,6 +45,10 @@ export default async function PaginaCompra({ params }: Props) {
 
   const estado = ESTADOS[orden.estado];
   const esCuota = orden.tipo === "cuota";
+  const pagaCuotas = esCuota || orden.plan === "cuotas";
+  const linkPago = pagaCuotas ? rifa.linkPagoCuotas : rifa.linkPago;
+  const unidades = esCuota ? (orden.detalle ?? []).length : orden.numeros.length;
+  const valorUnidad = pagaCuotas ? rifa.valorCuota : rifa.precioBoleta;
   const parametrosRegistro = new URLSearchParams({
     email: orden.emailContacto,
     nombre: orden.nombreContacto,
@@ -96,14 +100,14 @@ export default async function PaginaCompra({ params }: Props) {
 
           {orden.estado === "pendiente" && (
             <>
-              {rifa.linkPago ? (
+              {linkPago ? (
                 <a
-                  href={rifa.linkPago}
+                  href={linkPago}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(buttonVariants({ size: "lg" }), "fondo-oro h-12 text-base")}
                 >
-                  Pagar {formatoPesos(orden.total)} en {config.nombrePasarela}
+                  Pagar {formatoPesos(valorUnidad)} en {config.nombrePasarela}
                   <ExternalLink data-icon="inline-end" />
                 </a>
               ) : (
@@ -114,8 +118,19 @@ export default async function PaginaCompra({ params }: Props) {
                   </AlertDescription>
                 </Alert>
               )}
+              {linkPago && unidades > 1 && (
+                <Alert>
+                  <AlertTitle>
+                    Tu solicitud es de {unidades} × {formatoPesos(valorUnidad)}
+                  </AlertTitle>
+                  <AlertDescription>
+                    Cada link de pago es de {formatoPesos(valorUnidad)}. Realiza {unidades} pagos (uno por cada {pagaCuotas ? "cuota" : "boleta"}) usando la misma referencia{" "}
+                    {orden.referencia}.
+                  </AlertDescription>
+                </Alert>
+              )}
               <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
-                <li>1. Paga exactamente {formatoPesos(orden.total)} y escribe la referencia {orden.referencia} en la descripción.</li>
+                <li>1. Paga exactamente {formatoPesos(orden.total)} y escribe la referencia {orden.referencia} en la descripción. Si el pago no te deja escribirla, envíanos el comprobante con la referencia.</li>
                 <li>2. El máster verifica el pago en el banco y aprueba tu solicitud.</li>
                 <li>3. Te llega una notificación y tus boletas quedan en tu perfil.</li>
               </ul>

@@ -48,6 +48,7 @@ const esquemaRifa = z.object({
   descripcion: z.string().trim().min(10, "Escribe una descripción.").max(2000),
   imagenUrl: urlOpcional,
   linkPago: urlOpcional,
+  linkPagoCuotas: urlOpcional,
   precioBoleta: z.coerce.number().int().min(1000, "El precio mínimo es $1.000."),
   valorCuota: z.coerce.number().int().min(0),
   cifras: z.coerce.number().int().min(2).max(5),

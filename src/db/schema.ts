@@ -102,6 +102,7 @@ export const rifas = pgTable(
     premioDiario: integer("premio_diario").notNull().default(0),
     valorCuota: integer("valor_cuota").notNull().default(0),
     linkPago: text("link_pago"),
+    linkPagoCuotas: text("link_pago_cuotas"),
     estado: estadoRifaEnum("estado").notNull().default("borrador"),
     fechaUmbral: timestamp("fecha_umbral", { withTimezone: true }),
     fechaInicioSorteos: date("fecha_inicio_sorteos", { mode: "string" }),

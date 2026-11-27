@@ -63,7 +63,8 @@ async function main() {
         mesesEspera: 1,
         diasSorteo: 365,
         premioDiario: 1000000,
-        linkPago: process.env.WOMPI_LINK_PAGO || null,
+        linkPago: process.env.WOMPI_LINK_PAGO || "https://checkout.nequi.wompi.co/l/23xptl",
+        linkPagoCuotas: process.env.WOMPI_LINK_CUOTAS || "https://checkout.nequi.wompi.co/l/4IrUpw",
         estado: "activa",
       })
       .returning();
